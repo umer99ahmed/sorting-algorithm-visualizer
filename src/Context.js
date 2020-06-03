@@ -474,6 +474,7 @@ function ContextProvider({ children }) {
         let intervalId = setInterval(() => {
             if (i >= animationArr.length - 1) {
                 clearInterval(intervalId)
+                setStart(false)
             }
             console.log(animationArr[i])
             tempArr[animationArr[i].changedIdx].value = animationArr[i].length
@@ -520,11 +521,13 @@ function ContextProvider({ children }) {
             }
             else if (sortType === "quick") {
                 let quickArr = array.slice()
+                setStart(true)
+
                 animationArr = []
                 quickSort(quickArr, 0, quickArr.length - 1);
                 quickAnimate()
                 // setArray(quickArr.slice())
-                setStart(false)
+                // setStart(false)
 
             }
 
