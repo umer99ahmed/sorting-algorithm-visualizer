@@ -5,7 +5,8 @@ function Header() {
 
     return (
         <header>
-            <Link to="/"><h2>Sorting Algorithms</h2></Link>
+            {/* <Link to="/"><h2>Sorting Algorithms</h2></Link> */}
+            <h2>Sorting Algorithms</h2>
         </header >
     )
 }
