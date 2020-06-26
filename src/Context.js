@@ -6,14 +6,20 @@ function ContextProvider({ children }) {
 
     const [array, setArray] = useState([])
     const [start, setStart] = useState(false)
-    const [arraySize, setArraySize] = useState(50)
     const [sortSpeed, setSortSpeed] = useState(0)
-    const [sortType, setSortType] = useState("bubble")
+
+    if (!localStorage.getItem('currSort'))
+        localStorage.setItem('currSort', "bubble");
+    if (!localStorage.getItem('arrSize'))
+        localStorage.setItem('arrSize', 50);
+
+    const [arraySize, setArraySize] = useState(localStorage.getItem('arrSize'))
+    const [sortType, setSortType] = useState(localStorage.getItem('currSort'))
 
     let animationArr = []
     let tempLen
-    let index = 0
-    let freeze = false
+    // let index = 0
+    // let freeze = false
 
     //makes array when component mounts
     useEffect(() => {
@@ -208,7 +214,7 @@ function ContextProvider({ children }) {
                 max = right
             }
         }
-        if (max != i) {
+        if (max !== i) {
 
             [input[i], input[max]] = [input[max], input[i]]
             maxHeap(input, max)
@@ -356,7 +362,7 @@ function ContextProvider({ children }) {
         // console.log(animationArr)
 
         let intervalId = setInterval(() => {
-            if (i == animationArr.length - 1) {
+            if (i === animationArr.length - 1) {
                 clearInterval(intervalId)
                 tempArr[tempArr.length - 1].isCompared = false
                 tempArr[tempArr.length - 1].isSorted = true
@@ -364,7 +370,7 @@ function ContextProvider({ children }) {
 
                 let j = tempArr.length - 1
                 let intervalId2 = setInterval(() => {
-                    if (j == 0) {
+                    if (j === 0) {
                         clearInterval(intervalId2)
                     }
                     tempArr[j].isCompared = false
@@ -380,7 +386,7 @@ function ContextProvider({ children }) {
                 setArray(tempArr.slice())
             }
 
-            if (i != 0) {
+            if (i !== 0) {
                 tempArr[animationArr[i - 1].changedIdx].isCompared = false
             }
 
@@ -408,7 +414,7 @@ function ContextProvider({ children }) {
             //sort left and right
             quickSort(arr, low, partitionIndex - 1);
             quickSort(arr, partitionIndex + 1, high);
-        } else if (low == high) {
+        } else if (low === high) {
             animationArr.push({ changedIdx: low, length: arr[low].value, isSorted: true, isCompared: false })
 
         }
@@ -429,7 +435,7 @@ function ContextProvider({ children }) {
                 i++
                 // animationArr.push({ changedIdx: i, length: arr[i].value, isCompared: false, isSorted: false, isSwitch: true })
 
-                if (i != j) {
+                if (i !== j) {
 
                     animationArr.push({ changedIdx: i, length: arr[i].value, isCompared: false, isSorted: false, isSwitch: true })
                     // animationArr.push({ changedIdx: j, length: arr[j].value, isSorted: false, isCompared: true })

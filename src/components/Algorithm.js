@@ -9,6 +9,7 @@ function Algorithm(props) {
     const selectedId = sortType === props.name ? "selected" : ""
 
     function handleClick() {
+        localStorage.setItem('currSort', props.name);
         setSortType(props.name)
         randomizeArray()
     }

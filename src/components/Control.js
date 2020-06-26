@@ -12,7 +12,8 @@ function Control() {
     const resetIcon = resetHover ? "ri-refresh-fill" : "ri-refresh-line"
 
     function handleSizeChange(event) {
-        setArraySize(event.target.value)
+        localStorage.setItem('arrSize', event.target.value)
+        setArraySize(localStorage.getItem('arrSize'))
     }
     function handleSpeedChange(event) {
         const speed = 500 - event.target.value
